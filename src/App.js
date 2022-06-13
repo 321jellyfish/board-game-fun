@@ -1,15 +1,21 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import ReviewList from "./components/reviewlist";
 import Nav from "./components/nav";
+import { useState } from "react";
 
 function App() {
+  const [categories, setCategories] = useState([]);
+
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      <Nav />
-      <ReviewList />
-    </>
+      <Nav categories={categories} setCategories={setCategories} />
+      <Routes>
+        <Route path="/" element={<ReviewList />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

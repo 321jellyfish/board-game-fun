@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { fetchCategories } from "../utils/api";
 
-const Nav = () => {
-  const [categories, setCategories] = useState([]);
-
+const Nav = ({ categories, setCategories }) => {
   useEffect(() => {
     fetchCategories().then((fetchedCategories) => {
       setCategories(fetchedCategories);
