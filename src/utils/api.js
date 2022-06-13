@@ -9,3 +9,9 @@ export const fetchReviews = () => {
     return data.reviews;
   });
 };
+
+export const fetchCategories = () => {
+  return boardGameFunApi.get("/categories").then(({ data }) => {
+    return data.categories;
+  });
+};
