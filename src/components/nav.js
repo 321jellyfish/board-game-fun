@@ -18,7 +18,11 @@ const Nav = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate(`/${chosenCategory}`);
+    if (chosenCategory === "none") {
+      navigate("/");
+    } else {
+      navigate(`/${chosenCategory}`);
+    }
   };
 
   return (
@@ -27,18 +31,15 @@ const Nav = () => {
       <select
         name="category"
         id="category"
-        // onChange={(event) => {
-        //   setChosenCategory(event.target.value);
-        // }}
         onChange={(event) => {
           setCurrentlySelectedCategory(event.target.value);
         }}
       >
+        <option>none</option>
         {categories.map(({ slug }) => {
           return <option value={slug}>{slug}</option>;
         })}
       </select>
-      {/* <input type="submit" value="Submit" /> */}
       <button
         onClick={() => {
           setChosenCategory(currentlySelectedCategory);
