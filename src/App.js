@@ -1,7 +1,8 @@
 import "./App.css";
+import Header from "./components/header";
 
 function App() {
-  return <h1>Board Game Fun</h1>;
+  return <Header />;
 }
 
 export default App;
