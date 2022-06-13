@@ -14,7 +14,7 @@ const ReviewList = () => {
 
   return (
     <section>
-      <h2>{removeHyphen(pathcategory)} reviews</h2>
+      <h2>{!pathcategory ? "" : removeHyphen(pathcategory)} reviews</h2>
       <ul>
         {reviews.map(
           ({ title, category, owner, review_img_url, review_id }) => {
@@ -30,11 +30,14 @@ const ReviewList = () => {
                     </li>
                     <div className="review-card-text">
                       <li>
-                        <span className="italic">Owner:</span> {owner}{" "}
+                        <span className="bold">Owner: </span>
+                        {owner}
                       </li>
                       <li>
-                        <span className="italic">Category:</span>{" "}
-                        {removeHyphen(category)}
+                        <span className="bold">Category: </span>
+                        <span className="capitalize">
+                          {removeHyphen(category)}
+                        </span>
                       </li>
                     </div>
                   </div>
