@@ -1,36 +1,33 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { useState } from "react";
 import Header from "./components/header";
 import ReviewList from "./components/reviewlist";
 import Nav from "./components/nav";
-import { useState } from "react";
 
 function App() {
-  const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState("");
-
+  const [chosenCategory, setChosenCategory] = useState("no-category");
   return (
     <BrowserRouter>
       <Header />
       <Nav
-        categories={categories}
-        setCategories={setCategories}
-        category={category}
-        setCategory={setCategory}
+        chosenCategory={chosenCategory}
+        setChosenCategory={setChosenCategory}
       />
       <Routes>
-        <Route path="/" element={<ReviewList />}></Route>
-        {categories.map((category) => {
-          console.log(category.slug);
-          return (
-            <Route
-              path={`/${category.slug}`}
-              element={
-                <ReviewList category={category} setCategory={setCategory} />
-              }
-            ></Route>
-          );
-        })}
+        <Route
+          path="/"
+          element={<ReviewList chosenCategory={chosenCategory} />}
+        ></Route>
+        {/* <Route path="/:chosen-category" element={<ReviewList />}></Route> */}
+        <Route
+          path="/hidden-roles"
+          element={<ReviewList chosenCategory={chosenCategory} />}
+        ></Route>
+        <Route
+          path="/dexterity"
+          element={<ReviewList chosenCategory={chosenCategory} />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

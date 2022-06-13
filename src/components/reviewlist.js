@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchReviews } from "../utils/api";
+import { useParams } from "react-router-dom";
 
-const ReviewList = () => {
+const ReviewList = ({ chosenCategory, setChosenCategory }) => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -16,26 +17,27 @@ const ReviewList = () => {
       <ul>
         {reviews.map(
           ({ title, category, owner, review_img_url, review_id }) => {
-            return (
-              <ul key={review_id} className="review-card">
-                <li>
-                  <h3>{title}</h3>
-                </li>
-                <div className="review-card-body">
+            if (chosenCategory === "no-category" || chosenCategory === category)
+              return (
+                <ul key={review_id} className="review-card">
                   <li>
-                    <img src={review_img_url} alt={title} />
+                    <h3>{title}</h3>
                   </li>
-                  <div className="review-card-text">
+                  <div className="review-card-body">
                     <li>
-                      <span className="italic">Owner:</span> {owner}{" "}
+                      <img src={review_img_url} alt={title} />
                     </li>
-                    <li>
-                      <span className="italic">Category:</span> {category}
-                    </li>
+                    <div className="review-card-text">
+                      <li>
+                        <span className="italic">Owner:</span> {owner}{" "}
+                      </li>
+                      <li>
+                        <span className="italic">Category:</span> {category}
+                      </li>
+                    </div>
                   </div>
-                </div>
-              </ul>
-            );
+                </ul>
+              );
           }
         )}
       </ul>
