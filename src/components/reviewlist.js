@@ -3,6 +3,7 @@ import { fetchReviews } from "../utils/api";
 import { useParams } from "react-router-dom";
 
 const ReviewList = ({ chosenCategory, setChosenCategory }) => {
+  const { yocategory } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const ReviewList = ({ chosenCategory, setChosenCategory }) => {
       <ul>
         {reviews.map(
           ({ title, category, owner, review_img_url, review_id }) => {
-            if (chosenCategory === "no-category" || chosenCategory === category)
+            if (!yocategory || category === yocategory) {
               return (
                 <ul key={review_id} className="review-card">
                   <li>
@@ -38,6 +39,7 @@ const ReviewList = ({ chosenCategory, setChosenCategory }) => {
                   </div>
                 </ul>
               );
+            }
           }
         )}
       </ul>

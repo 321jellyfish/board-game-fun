@@ -19,15 +19,7 @@ function App() {
           path="/"
           element={<ReviewList chosenCategory={chosenCategory} />}
         ></Route>
-        {/* <Route path="/:chosen-category" element={<ReviewList />}></Route> */}
-        <Route
-          path="/hidden-roles"
-          element={<ReviewList chosenCategory={chosenCategory} />}
-        ></Route>
-        <Route
-          path="/dexterity"
-          element={<ReviewList chosenCategory={chosenCategory} />}
-        ></Route>
+        <Route path="/:yocategory" element={<ReviewList />}></Route>
       </Routes>
     </BrowserRouter>
   );

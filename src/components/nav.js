@@ -19,8 +19,6 @@ const Nav = ({ chosenCategory, setChosenCategory }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(chosenCategory, "chosenCategory");
-    // useNavigate
     navigate(`/${chosenCategory}`);
   };
 
