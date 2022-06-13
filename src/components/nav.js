@@ -45,7 +45,7 @@ const Nav = () => {
           setChosenCategory(currentlySelectedCategory);
         }}
       >
-        Change user
+        Submit
       </button>
     </form>
   );
