@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchCategories } from "../utils/api";
 
 const ReviewList = () => {
   const [reviews, setReviews] = useState([
