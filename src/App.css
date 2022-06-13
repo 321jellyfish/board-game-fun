@@ -1,3 +1,66 @@
+body {
+  text-align: center;
+}
+
+img {
+  max-width: 5rem;
+}
+
+li {
+  list-style: none;
+}
+
+ul, li {
+  padding: 0;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+header {
+  background-color: rgb(128, 128, 128, 0.2);
+  padding: 1rem;
+}
+
+header p {
+  font-style: italic;
+}
+
+.review-card {
+  background-color: white;
+  margin: 1rem;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  padding-bottom: 1.6rem;
+  max-width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0.25rem solid pink;
+}
+
+.review-card-text{
+  /* display: flex;
+  flex-dr */
+  text-align: left;
+}
+
+.review-card-body {
+  display: flex;
+  gap: 2rem;
+}
+
+.italic {
+  font-weight: bold; 
+}
+
+@media only screen and (min-width: 600px){
+  .review-card {
+    min-width: 30vw;
+    max-width: 40vw;
+  }
+}
+
 /* .App {
   text-align: center;
 }

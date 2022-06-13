@@ -17,13 +17,23 @@ const ReviewList = () => {
         {reviews.map(
           ({ title, category, owner, review_img_url, review_id }) => {
             return (
-              <ul key={review_id}>
-                <li>{title}</li>
-                <li>Owner: {owner} </li>
+              <ul key={review_id} className="review-card">
                 <li>
-                  <img src={review_img_url} alt={title} />
+                  <h3>{title}</h3>
                 </li>
-                <li>Category: {category}</li>
+                <div className="review-card-body">
+                  <li>
+                    <img src={review_img_url} alt={title} />
+                  </li>
+                  <div className="review-card-text">
+                    <li>
+                      <span className="italic">Owner:</span> {owner}{" "}
+                    </li>
+                    <li>
+                      <span className="italic">Category:</span> {category}
+                    </li>
+                  </div>
+                </div>
               </ul>
             );
           }
