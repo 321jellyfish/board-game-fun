@@ -14,6 +14,18 @@ const ReviewList = () => {
       designer: "Avery Wunzboogerz",
       comment_count: 61,
     },
+    {
+      owner: "weegembump",
+      title: "Ticket To Ride",
+      review_id: 16,
+      category: "deck-building",
+      review_img_url:
+        "https://images.pexels.com/photos/4691567/pexels-photo-4691567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      created_at: "2021-01-22T11:05:05.936Z",
+      votes: 1,
+      designer: "Alan R. Moon",
+      comment_count: 61,
+    },
   ]);
   return (
     <section>
