@@ -37,7 +37,11 @@ const Nav = () => {
       >
         <option>none</option>
         {categories.map(({ slug }) => {
-          return <option value={slug}>{slug}</option>;
+          return (
+            <option value={slug} key={slug}>
+              {slug}
+            </option>
+          );
         })}
       </select>
       <button
