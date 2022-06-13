@@ -7,17 +7,28 @@ import { useState } from "react";
 
 function App() {
   const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState("");
 
   return (
     <BrowserRouter>
       <Header />
-      <Nav categories={categories} setCategories={setCategories} />
+      <Nav
+        categories={categories}
+        setCategories={setCategories}
+        category={category}
+        setCategory={setCategory}
+      />
       <Routes>
         <Route path="/" element={<ReviewList />}></Route>
         {categories.map((category) => {
           console.log(category.slug);
           return (
-            <Route path={`/${category.slug}`} element={<ReviewList />}></Route>
+            <Route
+              path={`/${category.slug}`}
+              element={
+                <ReviewList category={category} setCategory={setCategory} />
+              }
+            ></Route>
           );
         })}
       </Routes>
