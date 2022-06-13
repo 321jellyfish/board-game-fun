@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { fetchCategories } from "../utils/api";
 import { useNavigate } from "react-router-dom";
 
-const Nav = ({ chosenCategory, setChosenCategory }) => {
-  //categories/setCategoreis/chosenCategory/setChosen = in here...
+const Nav = () => {
   const [categories, setCategories] = useState([]);
-  //   const [chosenCategory, setChosenCategory] = useState("");
+  const [chosenCategory, setChosenCategory] = useState("");
   const [currentlySelectedCategory, setCurrentlySelectedCategory] =
     useState("");
 

@@ -6,19 +6,12 @@ import ReviewList from "./components/reviewlist";
 import Nav from "./components/nav";
 
 function App() {
-  const [chosenCategory, setChosenCategory] = useState("no-category");
   return (
     <BrowserRouter>
       <Header />
-      <Nav
-        chosenCategory={chosenCategory}
-        setChosenCategory={setChosenCategory}
-      />
+      <Nav />
       <Routes>
-        <Route
-          path="/"
-          element={<ReviewList chosenCategory={chosenCategory} />}
-        ></Route>
+        <Route path="/" element={<ReviewList />}></Route>
         <Route path="/:yocategory" element={<ReviewList />}></Route>
       </Routes>
     </BrowserRouter>
