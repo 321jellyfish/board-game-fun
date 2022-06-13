@@ -12,7 +12,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<ReviewList />}></Route>
-        <Route path="/:yocategory" element={<ReviewList />}></Route>
+        <Route path="/:pathcategory" element={<ReviewList />}></Route>
       </Routes>
     </BrowserRouter>
   );
