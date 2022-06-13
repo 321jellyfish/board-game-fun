@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchCategories } from "../utils/api";
+import { fetchCategories, removeHyphen } from "../utils/api";
 import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
@@ -40,7 +40,7 @@ const Nav = () => {
           {categories.map(({ slug }) => {
             return (
               <option value={slug} key={slug}>
-                {slug}
+                {removeHyphen(slug)}
               </option>
             );
           })}
