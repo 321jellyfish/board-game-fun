@@ -26,32 +26,34 @@ const Nav = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="category">Choose category:</label>
-      <select
-        name="category"
-        id="category"
-        onChange={(event) => {
-          setCurrentlySelectedCategory(event.target.value);
-        }}
-      >
-        <option>none</option>
-        {categories.map(({ slug }) => {
-          return (
-            <option value={slug} key={slug}>
-              {slug}
-            </option>
-          );
-        })}
-      </select>
-      <button
-        onClick={() => {
-          setChosenCategory(currentlySelectedCategory);
-        }}
-      >
-        Submit
-      </button>
-    </form>
+    <nav>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="category">Choose category:</label>
+        <select
+          name="category"
+          id="category"
+          onChange={(event) => {
+            setCurrentlySelectedCategory(event.target.value);
+          }}
+        >
+          <option>none</option>
+          {categories.map(({ slug }) => {
+            return (
+              <option value={slug} key={slug}>
+                {slug}
+              </option>
+            );
+          })}
+        </select>
+        <button
+          onClick={() => {
+            setChosenCategory(currentlySelectedCategory);
+          }}
+        >
+          Submit
+        </button>
+      </form>
+    </nav>
   );
 };
 
