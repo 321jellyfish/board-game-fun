@@ -14,6 +14,12 @@ function App() {
       <Nav categories={categories} setCategories={setCategories} />
       <Routes>
         <Route path="/" element={<ReviewList />}></Route>
+        {categories.map((category) => {
+          console.log(category.slug);
+          return (
+            <Route path={`/${category.slug}`} element={<ReviewList />}></Route>
+          );
+        })}
       </Routes>
     </BrowserRouter>
   );
