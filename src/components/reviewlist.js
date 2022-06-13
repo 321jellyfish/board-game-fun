@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchReviews } from "../utils/api";
+import { fetchReviews, removeHyphen } from "../utils/api";
 import { useParams } from "react-router-dom";
 
 const ReviewList = () => {
@@ -14,7 +14,7 @@ const ReviewList = () => {
 
   return (
     <section>
-      <h2>{pathcategory} reviews</h2>
+      <h2>{removeHyphen(pathcategory)} reviews</h2>
       <ul>
         {reviews.map(
           ({ title, category, owner, review_img_url, review_id }) => {
@@ -33,7 +33,8 @@ const ReviewList = () => {
                         <span className="italic">Owner:</span> {owner}{" "}
                       </li>
                       <li>
-                        <span className="italic">Category:</span> {category}
+                        <span className="italic">Category:</span>{" "}
+                        {removeHyphen(category)}
                       </li>
                     </div>
                   </div>

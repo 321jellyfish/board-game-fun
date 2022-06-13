@@ -15,3 +15,9 @@ export const fetchCategories = () => {
     return data.categories;
   });
 };
+
+export const removeHyphen = (input) => {
+  const regex = /-/g;
+  const output = input.replace(regex, " ");
+  return output;
+};
