@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header>
-      <h1>Board Game Fun</h1>
+      <h1>
+        <Link to="/">Board Game Fun</Link>
+      </h1>
       <p>Rate, discuss and find out about your favourite board games</p>
     </header>
   );
