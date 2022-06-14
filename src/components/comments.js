@@ -1,6 +1,7 @@
 import { fetchComments } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+// import CommentList from "../components/comment-list";
 
 const Comments = () => {
   const { reviewid } = useParams();
@@ -24,7 +25,6 @@ const Comments = () => {
 
   const selectAddComment = (event) => {
     event.preventDefault();
-    console.log("select add comment");
     setAddCommentStatus(true);
   };
 
@@ -48,6 +48,24 @@ const Comments = () => {
           <button>Submit comment</button>
         </form>
         <button onClick={returnToComments}>Return to comments</button>
+        <h3>Comments</h3>
+        <button onClick={selectAddComment}>Add comment</button>
+
+        {comments ? (
+          comments.map(({ body, author, comment_id }) => {
+            return (
+              <div className="comment-card">
+                <p>{body}</p>
+                <p className="commenter">
+                  <span className="bold">Commenter: </span>
+                  {author}
+                </p>
+              </div>
+            );
+          })
+        ) : (
+          <p className="no-comments">No comments yet...</p>
+        )}
       </>
     );
   }
@@ -55,16 +73,7 @@ const Comments = () => {
     <>
       <h3>Comments</h3>
       <button onClick={selectAddComment}>Add comment</button>
-      {/* <form onSubmit={handleSubmit}>
-        <label for="comment-body">Comment:</label>
-        <input
-          type="textarea"
-          id="comment-body"
-          name="comment-body"
-          placeholder="Your comment"
-        />
-        <button>Submit comment</button>
-      </form> */}
+
       {comments ? (
         comments.map(({ body, author, comment_id }) => {
           return (
