@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { fetchReviews } from "../utils/api";
+import { fetchReviews, removeHyphen } from "../utils/api";
+import { useParams } from "react-router-dom";
 
 const ReviewList = () => {
+  const { pathcategory } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -12,30 +14,36 @@ const ReviewList = () => {
 
   return (
     <section>
-      <h2>All reviews</h2>
+      <h2>{!pathcategory ? "All" : removeHyphen(pathcategory)} Reviews</h2>
       <ul>
         {reviews.map(
           ({ title, category, owner, review_img_url, review_id }) => {
-            return (
-              <ul key={review_id} className="review-card">
-                <li>
-                  <h3>{title}</h3>
-                </li>
-                <div className="review-card-body">
+            if (!pathcategory || category === pathcategory) {
+              return (
+                <ul key={review_id} className="review-card">
                   <li>
-                    <img src={review_img_url} alt={title} />
+                    <h3>{title}</h3>
                   </li>
-                  <div className="review-card-text">
+                  <div className="review-card-body">
                     <li>
-                      <span className="italic">Owner:</span> {owner}{" "}
+                      <img src={review_img_url} alt={title} />
                     </li>
-                    <li>
-                      <span className="italic">Category:</span> {category}
-                    </li>
+                    <div className="review-card-text">
+                      <li>
+                        <span className="bold">Owner: </span>
+                        {owner}
+                      </li>
+                      <li>
+                        <span className="bold">Category: </span>
+                        <span className="capitalize">
+                          {removeHyphen(category)}
+                        </span>
+                      </li>
+                    </div>
                   </div>
-                </div>
-              </ul>
-            );
+                </ul>
+              );
+            }
           }
         )}
       </ul>

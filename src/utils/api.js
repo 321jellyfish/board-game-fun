@@ -9,3 +9,15 @@ export const fetchReviews = () => {
     return data.reviews;
   });
 };
+
+export const fetchCategories = () => {
+  return boardGameFunApi.get("/categories").then(({ data }) => {
+    return data.categories;
+  });
+};
+
+export const removeHyphen = (input) => {
+  const regex = /-/g;
+  const output = input.replace(regex, " ");
+  return output;
+};
