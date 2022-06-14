@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchReviewById } from "../utils/api";
+import { fetchReviewById, removeHyphen } from "../utils/api";
 
 const Review = () => {
   const { pathcategory } = useParams();
@@ -10,17 +10,14 @@ const Review = () => {
 
   useEffect(() => {
     fetchReviewById(reviewid).then((fetchedReview) => {
-      console.log(fetchedReview);
       setReview(fetchedReview);
     });
   }, []);
 
   return (
     <>
-      <h1>
-        Full Review {pathcategory} {reviewid}
-      </h1>
-      <p>{review.title}</p>
+      <h2 className="capitalize">{removeHyphen(pathcategory)}</h2>
+      <h3>{review.title}</h3>
     </>
   );
 };
