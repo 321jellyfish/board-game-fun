@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchReviewById, removeHyphen } from "../utils/api";
 
@@ -16,7 +16,9 @@ const Review = () => {
 
   return (
     <>
-      <h2 className="capitalize">{removeHyphen(pathcategory)}</h2>
+      <h2 className="capitalize">
+        <Link to={`/${review.category}`}>{removeHyphen(pathcategory)}</Link>
+      </h2>
       <h3>{review.title}</h3>
     </>
   );
