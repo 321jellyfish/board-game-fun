@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchReviewById, removeHyphen, changeVotes } from "../utils/api";
+import Comments from "../components/comments";
 
 const Review = () => {
   const { pathcategory } = useParams();
@@ -8,6 +9,7 @@ const Review = () => {
 
   const [votes, setVotes] = useState(0);
   const [error, setError] = useState(null);
+  const [disableButton, setDisableButton] = useState(false);
 
   const [review, setReview] = useState({});
 
@@ -21,12 +23,14 @@ const Review = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setError(null);
+    setDisableButton(true);
 
     if (event.target.innerText === "Upvote 👍") {
       setVotes((currentVotes) => {
         return currentVotes + 1;
       });
       changeVotes(reviewid, 1).catch((error) => {
+        setDisableButton(false);
         setError("Error");
         setVotes((currentVotes) => {
           return currentVotes - 1;
@@ -38,6 +42,7 @@ const Review = () => {
         return currentVotes - 1;
       });
       changeVotes(reviewid, -1).catch((error) => {
+        setDisableButton(false);
         setError("Error");
         setVotes((currentVotes) => {
           return currentVotes + 1;
@@ -63,12 +68,20 @@ const Review = () => {
           {review.owner}
         </p>
         <p>{review.review_body}</p>
-        <span className="bold">Current votes: </span> {votes}
+        <span className="bold">Current votes: {votes}</span>
+
         <div className="vote-container">
-          <button onClick={handleSubmit}>Upvote 👍</button>
-          <button onClick={handleSubmit}>Downvote 👎</button>
+          <button onClick={handleSubmit} disabled={disableButton}>
+            Upvote 👍
+          </button>
+          <button onClick={handleSubmit} disabled={disableButton}>
+            Downvote 👎
+          </button>
         </div>
         {error ? <p>Vote unsuccessful, please try again</p> : ""}
+      </section>
+      <section className="review-card">
+        <Comments />
       </section>
     </>
   );
