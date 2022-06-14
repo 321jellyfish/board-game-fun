@@ -6,6 +6,10 @@ img {
   max-width: 5rem;
 }
 
+.individual-image {
+  max-width: 10rem;
+}
+
 li {
   list-style: none;
 }

@@ -10,6 +10,7 @@ const Review = () => {
 
   useEffect(() => {
     fetchReviewById(reviewid).then((fetchedReview) => {
+      console.log(fetchedReview);
       setReview(fetchedReview);
     });
   }, []);
@@ -19,7 +20,19 @@ const Review = () => {
       <h2 className="capitalize">
         <Link to={`/${review.category}`}>{removeHyphen(pathcategory)}</Link>
       </h2>
-      <h3>{review.title}</h3>
+      <section className="review-card">
+        <h3>{review.title}</h3>
+        <img
+          className="individual-image"
+          src={review.review_img_url}
+          alt={review.title}
+        />
+        <p>{review.review_body}</p>
+        <p>
+          <span className="bold">Owner: </span>
+          {review.owner}
+        </p>
+      </section>
     </>
   );
 };

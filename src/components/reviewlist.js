@@ -44,7 +44,7 @@ const ReviewList = () => {
                       </div>
                     </div>
                   </ul>
-                  <Link to={`/${category}/${review_id}`}>Full review</Link>
+                  <Link to={`/${category}/${review_id}`}>Read review</Link>
                 </section>
               );
             }
