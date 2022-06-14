@@ -10,6 +10,8 @@ const Review = () => {
   const [votes, setVotes] = useState(0);
   const [error, setError] = useState(null);
 
+  const [lastVoteStatus, setLastVoteStatus] = useState("");
+
   const [review, setReview] = useState({});
 
   useEffect(() => {
@@ -33,6 +35,7 @@ const Review = () => {
           return currentVotes - 1;
         });
       });
+      setLastVoteStatus("upvote");
     }
     if (event.target.innerText === "Downvote 👎") {
       setVotes((currentVotes) => {
@@ -44,6 +47,7 @@ const Review = () => {
           return currentVotes + 1;
         });
       });
+      setLastVoteStatus("downvote");
     }
   };
 
@@ -64,10 +68,19 @@ const Review = () => {
           {review.owner}
         </p>
         <p>{review.review_body}</p>
-        <span className="bold">Current votes: </span> {votes}
+        <span className="bold">
+          {votes >= 20 || votes <= -20
+            ? `Maximum of 20 ${lastVoteStatus}s reached`
+            : `Current votes: ${votes}`}
+        </span>
+
         <div className="vote-container">
-          <button onClick={handleSubmit}>Upvote 👍</button>
-          <button onClick={handleSubmit}>Downvote 👎</button>
+          <button onClick={handleSubmit} disabled={votes >= 20 || votes <= -20}>
+            Upvote 👍
+          </button>
+          <button onClick={handleSubmit} disabled={votes >= 20 || votes <= -20}>
+            Downvote 👎
+          </button>
         </div>
         {error ? <p>Vote unsuccessful, please try again</p> : ""}
       </section>
