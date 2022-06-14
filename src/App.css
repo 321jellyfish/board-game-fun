@@ -6,6 +6,10 @@ img {
   max-width: 5rem;
 }
 
+.individual-image {
+  max-width: 10rem;
+}
+
 li {
   list-style: none;
 }
@@ -18,7 +22,7 @@ h1 {
   margin-top: 0;
 }
 
-h1 a {
+h1 a, h2 a {
   text-decoration:none;
   color: black;
 }
