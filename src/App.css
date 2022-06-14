@@ -53,8 +53,6 @@ header p {
 }
 
 .review-card-text{
-  /* display: flex;
-  flex-dr */
   text-align: left;
 }
 
@@ -65,6 +63,17 @@ header p {
 
 .bold {
   font-weight: bold; 
+}
+
+.vote-container {
+  margin: 1rem;
+  display: flex;
+  
+}
+
+.vote-container button {
+  margin: 0.75rem;
+  min-width: 7rem;
 }
 
 @media only screen and (min-width: 600px){

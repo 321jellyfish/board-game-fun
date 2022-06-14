@@ -26,11 +26,16 @@ const Review = () => {
           src={review.review_img_url}
           alt={review.title}
         />
-        <p>{review.review_body}</p>
         <p>
           <span className="bold">Owner: </span>
           {review.owner}
         </p>
+        <p>{review.review_body}</p>
+        <span className="bold">Current votes: </span> {review.votes}
+        <div className="vote-container">
+          <button>Upvote 👍</button>
+          <button>Downvote 👎</button>
+        </div>
       </section>
     </>
   );
