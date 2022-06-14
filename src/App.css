@@ -89,6 +89,10 @@ header p {
   font-size: 0.9rem; 
 }
 
+.no-comments {
+  font-style: italic;
+}
+
 @media only screen and (min-width: 600px){
   .review-card {
     min-width: 30vw;

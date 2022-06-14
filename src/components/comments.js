@@ -8,25 +8,32 @@ const Comments = () => {
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
-      setComments(fetchedComments);
+      if (fetchedComments.length === 0) {
+        setComments(null);
+      } else {
+        setComments(fetchedComments);
+      }
     });
   }, [reviewid]);
 
   return (
     <>
       <h3>Comments</h3>
-
-      {comments.map(({ body, author, comment_id }) => {
-        return (
-          <div className="comment-card">
-            <p>{body}</p>
-            <p className="commenter">
-              <span className="bold">Commenter: </span>
-              {author}
-            </p>
-          </div>
-        );
-      })}
+      {comments ? (
+        comments.map(({ body, author, comment_id }) => {
+          return (
+            <div className="comment-card">
+              <p>{body}</p>
+              <p className="commenter">
+                <span className="bold">Commenter: </span>
+                {author}
+              </p>
+            </div>
+          );
+        })
+      ) : (
+        <p className="no-comments">No comments yet...</p>
+      )}
     </>
   );
 };
