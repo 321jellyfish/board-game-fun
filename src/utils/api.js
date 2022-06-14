@@ -10,6 +10,12 @@ export const fetchReviews = () => {
   });
 };
 
+export const fetchReviewById = (review_id) => {
+  return boardGameFunApi.get(`/reviews/${review_id}`).then(({ data }) => {
+    return data.review;
+  });
+};
+
 export const fetchCategories = () => {
   return boardGameFunApi.get("/categories").then(({ data }) => {
     return data.categories;
