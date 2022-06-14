@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchReviewById, removeHyphen, changeVotes } from "../utils/api";
+import Comments from "../components/comments";
 
 const Review = () => {
   const { pathcategory } = useParams();
@@ -69,6 +70,9 @@ const Review = () => {
           <button onClick={handleSubmit}>Downvote 👎</button>
         </div>
         {error ? <p>Vote unsuccessful, please try again</p> : ""}
+      </section>
+      <section className="review-card">
+        <Comments />
       </section>
     </>
   );

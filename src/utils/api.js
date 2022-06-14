@@ -32,6 +32,14 @@ export const changeVotes = (review_id, votes) => {
     });
 };
 
+export const fetchComments = (review_id) => {
+  return boardGameFunApi
+    .get(`/reviews/${review_id}/comments`)
+    .then(({ data }) => {
+      return data.review;
+    });
+};
+
 export const removeHyphen = (input) => {
   const regex = /-/g;
   const output = input.replace(regex, " ");
