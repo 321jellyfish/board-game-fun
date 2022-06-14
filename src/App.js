@@ -1,6 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import ReviewList from "./components/reviewlist";
 import Nav from "./components/nav";
