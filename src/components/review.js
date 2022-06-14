@@ -10,10 +10,9 @@ const Review = () => {
 
   useEffect(() => {
     fetchReviewById(reviewid).then((fetchedReview) => {
-      console.log(fetchedReview);
       setReview(fetchedReview);
     });
-  }, []);
+  }, [reviewid]);
 
   return (
     <>
