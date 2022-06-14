@@ -20,8 +20,8 @@ const Comments = () => {
         return (
           <div className="comment-card">
             <p>{body}</p>
-            <p>
-              <span className="bold">Comment author: </span>
+            <p className="commenter">
+              <span className="bold">Commenter: </span>
               {author}
             </p>
           </div>

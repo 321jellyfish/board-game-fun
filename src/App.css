@@ -76,10 +76,29 @@ header p {
   min-width: 7rem;
 }
 
+.comment-card {
+  background-color: rgb(128, 128, 128, 0.1);
+  padding: 0.5rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.commenter {
+  text-align: right;
+  font-style: italic;
+  font-size: 0.9rem; 
+}
+
 @media only screen and (min-width: 600px){
   .review-card {
     min-width: 30vw;
     max-width: 40vw;
+  }
+  .commenter {
+    text-align: center;
+  }
+  .vote-container {
+    justify-content: center;
   }
 }
 
