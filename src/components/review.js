@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchReviewById, removeHyphen } from "../utils/api";
+import { fetchReviewById, removeHyphen, changeVote } from "../utils/api";
 
 const Review = () => {
   const { pathcategory } = useParams();
@@ -13,6 +13,16 @@ const Review = () => {
       setReview(fetchedReview);
     });
   }, [reviewid]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (event.target.innerText === "Upvote 👍") {
+      changeVote(reviewid, 1);
+    }
+    if (event.target.innerText === "Downvote 👎") {
+      changeVote(reviewid, -1);
+    }
+  };
 
   return (
     <>
@@ -33,8 +43,8 @@ const Review = () => {
         <p>{review.review_body}</p>
         <span className="bold">Current votes: </span> {review.votes}
         <div className="vote-container">
-          <button>Upvote 👍</button>
-          <button>Downvote 👎</button>
+          <button onClick={handleSubmit}>Upvote 👍</button>
+          <button onClick={handleSubmit}>Downvote 👎</button>
         </div>
       </section>
     </>

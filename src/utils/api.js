@@ -22,6 +22,20 @@ export const fetchCategories = () => {
   });
 };
 
+export const changeVote = (review_id, votes) => {
+  return boardGameFunApi
+    .patch(`/reviews/${review_id}`, {
+      inc_votes: `${votes}`,
+    })
+    .then(({ data }) => {
+      console.log(data);
+    });
+};
+
+//  {
+//   "inc_votes": 3
+//   },
+
 export const removeHyphen = (input) => {
   const regex = /-/g;
   const output = input.replace(regex, " ");
