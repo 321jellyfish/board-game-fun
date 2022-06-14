@@ -9,6 +9,7 @@ const Review = () => {
 
   const [votes, setVotes] = useState(0);
   const [error, setError] = useState(null);
+  const [disableButton, setDisableButton] = useState(false);
 
   const [lastVoteStatus, setLastVoteStatus] = useState("");
 
@@ -24,12 +25,14 @@ const Review = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setError(null);
+    setDisableButton(true);
 
     if (event.target.innerText === "Upvote 👍") {
       setVotes((currentVotes) => {
         return currentVotes + 1;
       });
       changeVotes(reviewid, 1).catch((error) => {
+        setDisableButton(false);
         setError("Error");
         setVotes((currentVotes) => {
           return currentVotes - 1;
@@ -42,6 +45,7 @@ const Review = () => {
         return currentVotes - 1;
       });
       changeVotes(reviewid, -1).catch((error) => {
+        setDisableButton(false);
         setError("Error");
         setVotes((currentVotes) => {
           return currentVotes + 1;
@@ -75,10 +79,16 @@ const Review = () => {
         </span>
 
         <div className="vote-container">
-          <button onClick={handleSubmit} disabled={votes >= 20 || votes <= -20}>
+          <button
+            onClick={handleSubmit}
+            disabled={votes >= 20 || votes <= -20 || disableButton}
+          >
             Upvote 👍
           </button>
-          <button onClick={handleSubmit} disabled={votes >= 20 || votes <= -20}>
+          <button
+            onClick={handleSubmit}
+            disabled={votes >= 20 || votes <= -20 || disableButton}
+          >
             Downvote 👎
           </button>
         </div>
