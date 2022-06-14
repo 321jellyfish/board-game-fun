@@ -1,26 +1,53 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchReviewById, removeHyphen, changeVote } from "../utils/api";
+import { fetchReviewById, removeHyphen, changeVotes } from "../utils/api";
 
 const Review = () => {
   const { pathcategory } = useParams();
   const { reviewid } = useParams();
+
+  const [votes, setVotes] = useState(0);
+  const [error, setError] = useState(null);
 
   const [review, setReview] = useState({});
 
   useEffect(() => {
     fetchReviewById(reviewid).then((fetchedReview) => {
       setReview(fetchedReview);
+      setVotes(review.votes);
     });
-  }, [reviewid]);
+  }, [reviewid, review.votes]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setError(null);
+
     if (event.target.innerText === "Upvote 👍") {
-      changeVote(reviewid, 1);
+      setVotes((currentVotes) => {
+        return currentVotes + 1;
+      });
     }
     if (event.target.innerText === "Downvote 👎") {
-      changeVote(reviewid, -1);
+      setVotes((currentVotes) => {
+        return currentVotes - 1;
+      });
+    }
+
+    if (event.target.innerText === "Upvote 👍") {
+      changeVotes(reviewid, 1).catch((error) => {
+        setError("Error");
+        setVotes((currentVotes) => {
+          return currentVotes - 1;
+        });
+      });
+    }
+    if (event.target.innerText === "Downvote 👎") {
+      changeVotes(reviewid, -1).catch((error) => {
+        setError("Error");
+        setVotes((currentVotes) => {
+          return currentVotes + 1;
+        });
+      });
     }
   };
 
@@ -41,11 +68,12 @@ const Review = () => {
           {review.owner}
         </p>
         <p>{review.review_body}</p>
-        <span className="bold">Current votes: </span> {review.votes}
+        <span className="bold">Current votes: </span> {votes}
         <div className="vote-container">
           <button onClick={handleSubmit}>Upvote 👍</button>
           <button onClick={handleSubmit}>Downvote 👎</button>
         </div>
+        {error ? <p>Vote unsuccessful, please try again</p> : ""}
       </section>
     </>
   );

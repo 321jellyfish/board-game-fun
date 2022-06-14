@@ -22,19 +22,15 @@ export const fetchCategories = () => {
   });
 };
 
-export const changeVote = (review_id, votes) => {
+export const changeVotes = (review_id, votes) => {
   return boardGameFunApi
     .patch(`/reviews/${review_id}`, {
       inc_votes: `${votes}`,
     })
     .then(({ data }) => {
-      console.log(data);
+      return data.review;
     });
 };
-
-//  {
-//   "inc_votes": 3
-//   },
 
 export const removeHyphen = (input) => {
   const regex = /-/g;
