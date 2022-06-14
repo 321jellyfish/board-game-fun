@@ -26,14 +26,6 @@ const Review = () => {
       setVotes((currentVotes) => {
         return currentVotes + 1;
       });
-    }
-    if (event.target.innerText === "Downvote 👎") {
-      setVotes((currentVotes) => {
-        return currentVotes - 1;
-      });
-    }
-
-    if (event.target.innerText === "Upvote 👍") {
       changeVotes(reviewid, 1).catch((error) => {
         setError("Error");
         setVotes((currentVotes) => {
@@ -42,6 +34,9 @@ const Review = () => {
       });
     }
     if (event.target.innerText === "Downvote 👎") {
+      setVotes((currentVotes) => {
+        return currentVotes - 1;
+      });
       changeVotes(reviewid, -1).catch((error) => {
         setError("Error");
         setVotes((currentVotes) => {
