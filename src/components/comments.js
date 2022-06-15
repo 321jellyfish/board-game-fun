@@ -11,6 +11,8 @@ const Comments = () => {
     body: "",
   });
   const [disableForm, setDisableForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
@@ -24,11 +26,17 @@ const Comments = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setFormSubmitted(true);
     if (formInput.body.length >= 5) {
-      postComment(user, formInput.body, reviewid).then((postedComment) => {
-        console.log(postedComment, "posted comment");
-        setDisableForm(true);
-      });
+      postComment(user, formInput.body, reviewid)
+        .then(() => {
+          setDisableForm(true);
+        })
+        .catch((error) => {
+          setFormSubmitted(false);
+          setDisableForm(false);
+          setError("Error");
+        });
     }
   };
 
@@ -54,8 +62,16 @@ const Comments = () => {
           disabled={disableForm}
           required
         />
-        <p>Minimum 5 characters</p>
-        <p>Maximum 100 characters</p>
+        {formSubmitted ? <em>Thank you for your comment</em> : ""}
+        {error ? (
+          <p className="bold">
+            Sorry there was a problem, please try submitting your comment again
+          </p>
+        ) : (
+          ""
+        )}
+        {formSubmitted ? "" : <p>Minimum 5 characters</p>}
+        {formSubmitted ? "" : <p>Maximum 100 characters</p>}
         <p>
           <span className="bold">Commenting as: </span>
           {user}
