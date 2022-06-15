@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 
-const SortBar = ({ searchParams, setSearchParams }) => {
+const SortBar = ({ setSearchParams }) => {
   const [currentlySelectedSortBy, setCurrentlySelectedSortBy] =
     useState("created_at");
   const [submittedSortBy, setSubmittedSortBy] = useState("created_at");
-  const [order, setOrder] = useState("Descending");
+
+  const [currentlySelectedOrderBy, setCurrentlySelectedOrderBy] =
+    useState("desc");
+  const [submittedOrderBy, setSubmittedOrderBy] = useState("desc");
 
   useEffect(() => {
-    setSearchParams({ sort_by: submittedSortBy });
-  }, [submittedSortBy]);
+    setSearchParams({ sort_by: submittedSortBy, order_by: submittedOrderBy });
+  }, [submittedSortBy, submittedOrderBy]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,12 +20,7 @@ const SortBar = ({ searchParams, setSearchParams }) => {
 
   const handleOrderChange = (event) => {
     event.preventDefault();
-    if (order === "Descending") {
-      setOrder("Ascending");
-    }
-    if (order === "Ascending") {
-      setOrder("Descending");
-    }
+    setSubmittedOrderBy(currentlySelectedOrderBy);
   };
 
   return (
@@ -42,7 +40,21 @@ const SortBar = ({ searchParams, setSearchParams }) => {
 
         <button>Submit</button>
       </form>
-      <button onClick={handleOrderChange}>{order}</button>
+      <form className="order-form" onSubmit={handleOrderChange}>
+        <label htmlFor="order">Sort by:</label>
+        <select
+          name="order"
+          id="order"
+          onChange={(event) => {
+            setCurrentlySelectedOrderBy(event.target.value);
+          }}
+        >
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+
+        <button>Submit</button>
+      </form>
     </>
   );
 };

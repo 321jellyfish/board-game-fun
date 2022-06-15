@@ -112,7 +112,7 @@ textarea {
   margin: 0.75rem;
 }
 
-.sort-form {
+.sort-form, .order-form {
   display: block;
 }
 
