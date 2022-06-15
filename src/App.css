@@ -99,6 +99,10 @@ form {
   align-items: center;
 }
 
+nav form {
+  display: block;
+}
+
 form button {
   max-width: 11rem;
   margin: 0.75rem;
@@ -106,6 +110,10 @@ form button {
 
 textarea {
   margin: 0.75rem;
+}
+
+.sort-form, .order-form {
+  display: block;
 }
 
 @media only screen and (min-width: 600px){

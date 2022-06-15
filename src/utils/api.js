@@ -1,13 +1,16 @@
 import axios from "axios";
+import dayjs from "dayjs";
 
 const boardGameFunApi = axios.create({
   baseURL: "https://board-game-fun.herokuapp.com/api/",
 });
 
-export const fetchReviews = () => {
-  return boardGameFunApi.get("/reviews").then(({ data }) => {
-    return data.reviews;
-  });
+export const fetchReviews = (searchParams) => {
+  return boardGameFunApi
+    .get(`/reviews`, { params: searchParams })
+    .then(({ data }) => {
+      return data.reviews;
+    });
 };
 
 export const fetchReviewById = (review_id) => {
@@ -55,4 +58,11 @@ export const removeHyphen = (input) => {
   const regex = /-/g;
   const output = input.replace(regex, " ");
   return output;
+};
+
+export const formatDate = (dateString) => {
+  let formattedDate = dayjs(dateString);
+  formattedDate = formattedDate.$d.toString();
+  formattedDate = formattedDate.slice(4, 15);
+  return formattedDate;
 };
