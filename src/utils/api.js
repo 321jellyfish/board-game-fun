@@ -5,10 +5,12 @@ const boardGameFunApi = axios.create({
   baseURL: "https://board-game-fun.herokuapp.com/api/",
 });
 
-export const fetchReviews = (sortBy = "created_at", orderBy = "desc") => {
-  return boardGameFunApi.get("/reviews").then(({ data }) => {
-    return data.reviews;
-  });
+export const fetchReviews = (searchParams) => {
+  return boardGameFunApi
+    .get(`/reviews`, { params: searchParams })
+    .then(({ data }) => {
+      return data.reviews;
+    });
 };
 
 export const fetchReviewById = (review_id) => {
