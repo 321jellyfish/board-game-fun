@@ -22,7 +22,7 @@ const Comments = () => {
         setComments(fetchedComments);
       }
     });
-  }, [reviewid]);
+  }, [reviewid, comments]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
