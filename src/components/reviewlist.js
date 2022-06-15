@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchReviews, removeHyphen } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import SortBar from "./sortbar";
 
 const ReviewList = () => {
   const { pathcategory } = useParams();
@@ -16,6 +17,7 @@ const ReviewList = () => {
   return (
     <section>
       <h2>{!pathcategory ? "All" : removeHyphen(pathcategory)} Reviews</h2>
+      <SortBar />
       <ul>
         {reviews.map(
           ({ title, category, owner, review_img_url, review_id }) => {

@@ -99,6 +99,10 @@ form {
   align-items: center;
 }
 
+nav form {
+  display: block;
+}
+
 form button {
   max-width: 11rem;
   margin: 0.75rem;
