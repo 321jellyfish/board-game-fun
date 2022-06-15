@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 
 const boardGameFunApi = axios.create({
   baseURL: "https://board-game-fun.herokuapp.com/api/",
@@ -55,4 +56,11 @@ export const removeHyphen = (input) => {
   const regex = /-/g;
   const output = input.replace(regex, " ");
   return output;
+};
+
+export const formatDate = (dateString) => {
+  let formattedDate = dayjs(dateString);
+  formattedDate = formattedDate.$d.toString();
+  formattedDate = formattedDate.slice(4, 15);
+  return formattedDate;
 };

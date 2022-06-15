@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchReviews, removeHyphen } from "../utils/api";
+import { fetchReviews, removeHyphen, formatDate } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SortBar from "./sortbar";
@@ -20,7 +20,15 @@ const ReviewList = () => {
       <SortBar />
       <ul>
         {reviews.map(
-          ({ title, category, owner, review_img_url, review_id }) => {
+          ({
+            title,
+            category,
+            owner,
+            review_img_url,
+            review_id,
+            votes,
+            created_at,
+          }) => {
             if (!pathcategory || category === pathcategory) {
               return (
                 <section className="review-card">
@@ -43,6 +51,8 @@ const ReviewList = () => {
                             {removeHyphen(category)}
                           </span>
                         </li>
+                        <li className="bold">{votes} votes</li>
+                        <li>{formatDate(created_at)}</li>
                       </div>
                     </div>
                   </ul>

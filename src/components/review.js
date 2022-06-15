@@ -68,7 +68,7 @@ const Review = () => {
           {review.owner}
         </p>
         <p>{review.review_body}</p>
-        <span className="bold">Current votes: {votes}</span>
+        <span className="bold">{votes} Votes</span>
 
         <div className="vote-container">
           <button onClick={handleSubmit} disabled={disableButton}>
