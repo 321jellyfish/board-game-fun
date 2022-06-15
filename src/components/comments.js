@@ -41,6 +41,7 @@ const Comments = () => {
           cols="30"
           placeholder="Your comment"
           value={formInput.body}
+          maxlength="100"
           onChange={(event) => {
             setFormInput((currentFormInput) => {
               const newInput = { ...currentFormInput };
@@ -50,6 +51,7 @@ const Comments = () => {
           }}
           disabled={disableForm}
         />
+        <p>Maximum 100 characters</p>
         <p>
           <span className="bold">Commenting as: </span>
           {user}
