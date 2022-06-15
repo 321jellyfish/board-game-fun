@@ -14,6 +14,7 @@ const Comments = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [error, setError] = useState(null);
   const [emptyTextarea, setEmptyTextarea] = useState("");
+  const [disableDelete, setDisableDelete] = useState(false);
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
@@ -46,6 +47,12 @@ const Comments = () => {
           setError("Error");
         });
     }
+  };
+
+  const handleDeleteClick = (event) => {
+    event.preventDefault();
+    setDisableDelete(true);
+    console.log("delette!!");
   };
 
   return (
@@ -92,6 +99,13 @@ const Comments = () => {
           return (
             <div className="comment-card">
               <p>{body}</p>
+              {user === author ? (
+                <button disabled={disableDelete} onClick={handleDeleteClick}>
+                  Delete comment
+                </button>
+              ) : (
+                ""
+              )}
               <p className="commenter">
                 <span className="bold">Commenter: </span>
                 {author}
