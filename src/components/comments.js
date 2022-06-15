@@ -13,10 +13,9 @@ const Comments = () => {
   const [disableForm, setDisableForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [error, setError] = useState(null);
+  const [deleteError, setDeleteError] = useState(null);
   const [emptyTextarea, setEmptyTextarea] = useState("");
   const [disableDelete, setDisableDelete] = useState(false);
-  const [commentIdForSubmittedDelete, setCommentIdForSubmittedDelete] =
-    useState("");
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
@@ -54,7 +53,11 @@ const Comments = () => {
   const handleDeleteClick = (event, comment_id) => {
     event.preventDefault();
     setDisableDelete(true);
-    deleteComment(comment_id);
+    deleteComment(comment_id).catch((error) => {
+      setDisableDelete(false);
+      setDeleteError("Error");
+    });
+    setDisableDelete(false);
   };
 
   return (
@@ -108,6 +111,11 @@ const Comments = () => {
                 >
                   Delete comment
                 </button>
+              ) : (
+                ""
+              )}
+              {user === author && deleteError ? (
+                <p>Sorry there was a problem, please trying deleting again</p>
               ) : (
                 ""
               )}

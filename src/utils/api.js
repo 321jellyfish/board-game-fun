@@ -56,7 +56,7 @@ export const postComment = (username, body, review_id) => {
 
 export const deleteComment = (comment_id) => {
   return boardGameFunApi.delete(`/comments/${comment_id}`).then((response) => {
-    console.log(response);
+    return response;
   });
 };
 
