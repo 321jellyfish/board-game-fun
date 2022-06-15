@@ -8,7 +8,7 @@ import { UserContext } from "./context/user";
 import { useState } from "react";
 
 function App() {
-  const [user, setUser] = useState("bainesface");
+  const [user, setUser] = useState("tickle122");
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>

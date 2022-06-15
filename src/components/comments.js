@@ -1,11 +1,16 @@
-import { fetchComments } from "../utils/api";
+import { fetchComments, postComment } from "../utils/api";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-// import CommentList from "../components/comment-list";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/user";
 
 const Comments = () => {
   const { reviewid } = useParams();
   const [comments, setComments] = useState([]);
+  const { user } = useContext(UserContext);
+  const [formInput, setFormInput] = useState({
+    body: "",
+  });
+  const [disableForm, setDisableForm] = useState(false);
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
@@ -19,7 +24,10 @@ const Comments = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submit form");
+    postComment(user, formInput.body, reviewid).then((postedComment) => {
+      console.log(postedComment, "posted comment");
+      setDisableForm(true);
+    });
   };
 
   return (
@@ -32,8 +40,21 @@ const Comments = () => {
           rows="4"
           cols="30"
           placeholder="Your comment"
+          value={formInput.body}
+          onChange={(event) => {
+            setFormInput((currentFormInput) => {
+              const newInput = { ...currentFormInput };
+              newInput.body = event.target.value;
+              return newInput;
+            });
+          }}
+          disabled={disableForm}
         />
-        <button>Submit comment</button>
+        <p>
+          <span className="bold">Commenting as: </span>
+          {user}
+        </p>
+        <button disabled={disableForm}>Submit comment</button>
       </form>
 
       {comments ? (
