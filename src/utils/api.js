@@ -40,6 +40,17 @@ export const fetchComments = (review_id) => {
     });
 };
 
+export const postComment = (username, body, review_id) => {
+  return boardGameFunApi
+    .post(`/reviews/${review_id}/comments`, {
+      username: `${username}`,
+      body: `${body}`,
+    })
+    .then(({ data }) => {
+      return data;
+    });
+};
+
 export const removeHyphen = (input) => {
   const regex = /-/g;
   const output = input.replace(regex, " ");

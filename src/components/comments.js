@@ -1,10 +1,19 @@
-import { fetchComments } from "../utils/api";
+import { fetchComments, postComment } from "../utils/api";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/user";
 
 const Comments = () => {
   const { reviewid } = useParams();
   const [comments, setComments] = useState([]);
+  const { user } = useContext(UserContext);
+  const [formInput, setFormInput] = useState({
+    body: "",
+  });
+  const [disableForm, setDisableForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [error, setError] = useState(null);
+  const [emptyTextarea, setEmptyTextarea] = useState("");
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
@@ -14,11 +23,70 @@ const Comments = () => {
         setComments(fetchedComments);
       }
     });
-  }, [reviewid]);
+  }, [reviewid, comments]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (formInput.body.length < 5) {
+      setFormSubmitted(false);
+    }
+    if (formInput.body.length >= 5) {
+      setFormSubmitted(true);
+      setEmptyTextarea("");
+      postComment(user, formInput.body, reviewid)
+        .then(() => {
+          setDisableForm(true);
+          setFormInput({
+            body: "",
+          });
+        })
+        .catch((error) => {
+          setFormSubmitted(false);
+          setDisableForm(false);
+          setError("Error");
+        });
+    }
+  };
 
   return (
     <>
       <h3>Comments</h3>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          id="comment-body"
+          name="comment-body"
+          rows="4"
+          cols="30"
+          placeholder="Your comment"
+          value={formSubmitted ? emptyTextarea : formInput.body}
+          maxLength="100"
+          onChange={(event) => {
+            setFormInput((currentFormInput) => {
+              const newInput = { ...currentFormInput };
+              newInput.body = event.target.value;
+              return newInput;
+            });
+          }}
+          disabled={disableForm}
+          required
+        />
+        {formSubmitted ? <em>Thank you for your comment</em> : ""}
+        {error ? (
+          <p className="bold">
+            Sorry there was a problem, please try submitting your comment again
+          </p>
+        ) : (
+          ""
+        )}
+        {formSubmitted ? "" : <p>Minimum 5 characters</p>}
+        {formSubmitted ? "" : <p>Maximum 100 characters</p>}
+        <p>
+          <span className="bold">Commenting as: </span>
+          {user}
+        </p>
+        <button disabled={disableForm}>Submit comment</button>
+      </form>
+
       {comments ? (
         comments.map(({ body, author, comment_id }) => {
           return (
