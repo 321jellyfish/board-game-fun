@@ -112,6 +112,10 @@ textarea {
   margin: 0.75rem;
 }
 
+.sort-form {
+  display: block;
+}
+
 @media only screen and (min-width: 600px){
   .review-card {
     min-width: 30vw;
