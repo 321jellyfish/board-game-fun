@@ -52,7 +52,10 @@ const ReviewList = () => {
                           </span>
                         </li>
                         <li className="bold">{votes} votes</li>
-                        <li>{formatDate(created_at)}</li>
+                        <li>
+                          <span className="bold">Posted:</span>{" "}
+                          {formatDate(created_at)}
+                        </li>
                       </div>
                     </div>
                   </ul>
