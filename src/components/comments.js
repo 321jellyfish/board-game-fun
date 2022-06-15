@@ -13,6 +13,7 @@ const Comments = () => {
   const [disableForm, setDisableForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [error, setError] = useState(null);
+  const [emptyTextarea, setEmptyTextarea] = useState("");
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
@@ -31,9 +32,13 @@ const Comments = () => {
     }
     if (formInput.body.length >= 5) {
       setFormSubmitted(true);
+      setEmptyTextarea("");
       postComment(user, formInput.body, reviewid)
         .then(() => {
           setDisableForm(true);
+          setFormInput({
+            body: "",
+          });
         })
         .catch((error) => {
           setFormSubmitted(false);
@@ -53,7 +58,7 @@ const Comments = () => {
           rows="4"
           cols="30"
           placeholder="Your comment"
-          value={formInput.body}
+          value={formSubmitted ? emptyTextarea : formInput.body}
           maxLength="100"
           onChange={(event) => {
             setFormInput((currentFormInput) => {
