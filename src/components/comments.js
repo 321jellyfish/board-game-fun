@@ -1,4 +1,4 @@
-import { fetchComments, postComment } from "../utils/api";
+import { fetchComments, postComment, deleteComment } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/user";
@@ -15,6 +15,8 @@ const Comments = () => {
   const [error, setError] = useState(null);
   const [emptyTextarea, setEmptyTextarea] = useState("");
   const [disableDelete, setDisableDelete] = useState(false);
+  const [commentIdForSubmittedDelete, setCommentIdForSubmittedDelete] =
+    useState("");
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
@@ -49,10 +51,10 @@ const Comments = () => {
     }
   };
 
-  const handleDeleteClick = (event) => {
+  const handleDeleteClick = (event, comment_id) => {
     event.preventDefault();
     setDisableDelete(true);
-    console.log("delette!!");
+    deleteComment(comment_id);
   };
 
   return (
@@ -100,7 +102,10 @@ const Comments = () => {
             <div className="comment-card">
               <p>{body}</p>
               {user === author ? (
-                <button disabled={disableDelete} onClick={handleDeleteClick}>
+                <button
+                  disabled={disableDelete}
+                  onClick={(event) => handleDeleteClick(event, comment_id)}
+                >
                   Delete comment
                 </button>
               ) : (

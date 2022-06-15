@@ -54,6 +54,12 @@ export const postComment = (username, body, review_id) => {
     });
 };
 
+export const deleteComment = (comment_id) => {
+  return boardGameFunApi.delete(`/comments/${comment_id}`).then((response) => {
+    console.log(response);
+  });
+};
+
 export const removeHyphen = (input) => {
   const regex = /-/g;
   const output = input.replace(regex, " ");
