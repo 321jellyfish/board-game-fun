@@ -24,10 +24,12 @@ const Comments = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    postComment(user, formInput.body, reviewid).then((postedComment) => {
-      console.log(postedComment, "posted comment");
-      setDisableForm(true);
-    });
+    if (formInput.body.length >= 5) {
+      postComment(user, formInput.body, reviewid).then((postedComment) => {
+        console.log(postedComment, "posted comment");
+        setDisableForm(true);
+      });
+    }
   };
 
   return (
@@ -41,7 +43,7 @@ const Comments = () => {
           cols="30"
           placeholder="Your comment"
           value={formInput.body}
-          maxlength="100"
+          maxLength="100"
           onChange={(event) => {
             setFormInput((currentFormInput) => {
               const newInput = { ...currentFormInput };
@@ -50,7 +52,9 @@ const Comments = () => {
             });
           }}
           disabled={disableForm}
+          required
         />
+        <p>Minimum 5 characters</p>
         <p>Maximum 100 characters</p>
         <p>
           <span className="bold">Commenting as: </span>
