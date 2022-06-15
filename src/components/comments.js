@@ -16,6 +16,7 @@ const Comments = () => {
   const [deleteError, setDeleteError] = useState(null);
   const [emptyTextarea, setEmptyTextarea] = useState("");
   const [disableDelete, setDisableDelete] = useState(false);
+  const [succesfullyDelete, setSuccessfullyDeleted] = useState(false);
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
@@ -53,11 +54,15 @@ const Comments = () => {
   const handleDeleteClick = (event, comment_id) => {
     event.preventDefault();
     setDisableDelete(true);
-    deleteComment(comment_id).catch((error) => {
-      setDisableDelete(false);
-      setDeleteError("Error");
-    });
-    setDisableDelete(false);
+    deleteComment(comment_id)
+      .then(() => {
+        setDisableDelete(false);
+        setSuccessfullyDeleted(true);
+      })
+      .catch((error) => {
+        setDisableDelete(false);
+        setDeleteError("Error");
+      });
   };
 
   return (
@@ -98,7 +103,7 @@ const Comments = () => {
         </p>
         <button disabled={disableForm}>Submit comment</button>
       </form>
-
+      {succesfullyDelete ? <p>Your comment was deleted</p> : ""}
       {comments ? (
         comments.map(({ body, author, comment_id }) => {
           return (
