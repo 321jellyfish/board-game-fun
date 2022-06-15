@@ -26,8 +26,11 @@ const Comments = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setFormSubmitted(true);
+    if (formInput.body.length < 5) {
+      setFormSubmitted(false);
+    }
     if (formInput.body.length >= 5) {
+      setFormSubmitted(true);
       postComment(user, formInput.body, reviewid)
         .then(() => {
           setDisableForm(true);
