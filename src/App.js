@@ -5,6 +5,7 @@ import ReviewList from "./components/reviewlist";
 import Nav from "./components/nav";
 import Review from "./components/review";
 import UserBar from "./components/userbar";
+import ErrorPage from "./components/errorpage";
 import { UserContext } from "./context/user";
 import { useState } from "react";
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<ReviewList />}></Route>
           <Route path="/:pathcategory" element={<ReviewList />}></Route>
           <Route path="/:pathcategory/:reviewid" element={<Review />}></Route>
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

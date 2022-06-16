@@ -3,6 +3,7 @@ import { fetchReviews, removeHyphen, formatDate } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { Link, useSearchParams } from "react-router-dom";
 import SortBar from "./sortbar";
+import ErrorPage from "./errorpage";
 
 const ReviewList = () => {
   const { pathcategory } = useParams();
@@ -11,29 +12,45 @@ const ReviewList = () => {
     sort_by: "created_at",
     order_by: "desc",
   });
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetchReviews(searchParams).then((fetchedReviews) => {
-      setReviews(fetchedReviews);
-    });
-  }, [searchParams]);
+    const categorySearchParams = { ...searchParams };
+    categorySearchParams.category = pathcategory;
+    fetchReviews(categorySearchParams)
+      .then((fetchedReviews) => {
+        setReviews(fetchedReviews);
+        setError(false);
+      })
+      .catch(() => {
+        setError(true);
+      });
+  }, [searchParams, pathcategory]);
 
-  return (
-    <section>
-      <h2>{!pathcategory ? "All" : removeHyphen(pathcategory)} Reviews</h2>
-      <SortBar searchParams={searchParams} setSearchParams={setSearchParams} />
-      <ul>
-        {reviews.map(
-          ({
-            title,
-            category,
-            owner,
-            review_img_url,
-            review_id,
-            votes,
-            created_at,
-          }) => {
-            if (!pathcategory || category === pathcategory) {
+  if (error) {
+    return <ErrorPage />;
+  }
+  if (!error)
+    return (
+      <section>
+        <h2>
+          {!pathcategory && !error ? "All" : removeHyphen(pathcategory)} Reviews
+        </h2>
+        <SortBar
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+        />
+        <ul>
+          {reviews.map(
+            ({
+              title,
+              category,
+              owner,
+              review_img_url,
+              review_id,
+              votes,
+              created_at,
+            }) => {
               return (
                 <section className="review-card">
                   <ul key={review_id}>
@@ -67,11 +84,10 @@ const ReviewList = () => {
                 </section>
               );
             }
-          }
-        )}
-      </ul>
-    </section>
-  );
+          )}
+        </ul>
+      </section>
+    );
 };
 
 export default ReviewList;
