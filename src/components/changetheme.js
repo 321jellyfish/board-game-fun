@@ -11,8 +11,8 @@ const ChangeTheme = () => {
   };
 
   return (
-    <button onClick={changeTheme} className={theme}>
-      Change theme
+    <button onClick={changeTheme} className={theme} id="theme-button">
+      {theme.charAt(0).toUpperCase() + theme.slice(1)} theme: ON
     </button>
   );
 };

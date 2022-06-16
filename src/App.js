@@ -23,8 +23,10 @@ function App() {
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <BrowserRouter>
           <div className={theme}>
-            <UserBar />
-            <ChangeTheme />
+            <div className="top-bar">
+              <ChangeTheme />
+              <UserBar />
+            </div>
             <Header />
             <Nav />
             <Routes>
