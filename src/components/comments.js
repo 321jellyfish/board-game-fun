@@ -87,7 +87,11 @@ const Comments = () => {
           disabled={disableForm}
           required
         />
-        {formSubmitted ? <em>Thank you for your comment</em> : ""}
+        {formSubmitted && !succesfullyDelete ? (
+          <em>Thank you for your comment</em>
+        ) : (
+          ""
+        )}
         {error ? (
           <p className="bold">
             Sorry there was a problem, please try submitting your comment again
@@ -103,7 +107,13 @@ const Comments = () => {
         </p>
         <button disabled={disableForm}>Submit comment</button>
       </form>
-      {succesfullyDelete ? <p>Your comment was deleted</p> : ""}
+      {succesfullyDelete ? (
+        <p>
+          <em>Your comment was deleted</em>
+        </p>
+      ) : (
+        ""
+      )}
       {comments ? (
         comments.map(({ body, author, comment_id }) => {
           return (
