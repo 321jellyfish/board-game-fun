@@ -3,6 +3,7 @@ import { fetchReviews, removeHyphen, formatDate } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { Link, useSearchParams } from "react-router-dom";
 import SortBar from "./sortbar";
+import ErrorPage from "./errorpage";
 
 const ReviewList = () => {
   const { pathcategory } = useParams();
@@ -11,6 +12,7 @@ const ReviewList = () => {
     sort_by: "created_at",
     order_by: "desc",
   });
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetchReviews(searchParams).then((fetchedReviews) => {
@@ -20,9 +22,17 @@ const ReviewList = () => {
 
   return (
     <section>
-      <h2>{!pathcategory ? "All" : removeHyphen(pathcategory)} Reviews</h2>
+      <h2>
+        {!pathcategory && !error ? "All" : removeHyphen(pathcategory)} Reviews
+      </h2>
       <SortBar searchParams={searchParams} setSearchParams={setSearchParams} />
       <ul>
+        {/* {reviews.some(({ category }) => {
+          return category === pathcategory;
+        })
+          ? ""
+          : setError(true)} */}
+
         {reviews.map(
           ({
             title,
@@ -33,7 +43,7 @@ const ReviewList = () => {
             votes,
             created_at,
           }) => {
-            if (!pathcategory || category === pathcategory) {
+            if ((!pathcategory || category === pathcategory) && !error) {
               return (
                 <section className="review-card">
                   <ul key={review_id}>
