@@ -8,6 +8,9 @@ import ErrorPage from "./errorpage";
 const ReviewList = () => {
   const { pathcategory } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [submittedSortBy, setSubmittedSortBy] = useState("created_at");
+  const [submittedOrderBy, setSubmittedOrderBy] = useState("desc");
+
   let [searchParams, setSearchParams] = useSearchParams({
     sort_by: "created_at",
     order_by: "desc",
@@ -15,7 +18,11 @@ const ReviewList = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const categorySearchParams = { ...searchParams };
+    setSearchParams({ sort_by: submittedSortBy, order_by: submittedOrderBy });
+    const categorySearchParams = {
+      sort_by: submittedSortBy,
+      order_by: submittedOrderBy,
+    };
     categorySearchParams.category = pathcategory;
     fetchReviews(categorySearchParams)
       .then((fetchedReviews) => {
@@ -25,7 +32,7 @@ const ReviewList = () => {
       .catch(() => {
         setError(true);
       });
-  }, [searchParams, pathcategory]);
+  }, [submittedOrderBy, submittedSortBy, pathcategory]);
 
   if (error) {
     return <ErrorPage />;
@@ -39,6 +46,8 @@ const ReviewList = () => {
         <SortBar
           searchParams={searchParams}
           setSearchParams={setSearchParams}
+          setSubmittedOrderBy={setSubmittedOrderBy}
+          setSubmittedSortBy={setSubmittedSortBy}
         />
         <ul>
           {reviews.map(

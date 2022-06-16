@@ -115,7 +115,16 @@ nav form {
   display: block;
 }
 
+.sort-container {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
 
+.sort-form-label {
+  display: flex;
+  flex-direction: column;
+}
 
 form button {
   max-width: 11rem;
