@@ -28,10 +28,10 @@ const Nav = () => {
   return (
     <nav>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="category">Choose category:</label>
+        <label htmlFor="choose-category">Choose category:</label>
         <select
-          name="category"
-          id="category"
+          name="choose-category"
+          id="choose-category"
           onChange={(event) => {
             setCurrentlySelectedCategory(event.target.value);
           }}

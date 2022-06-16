@@ -22,11 +22,7 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <BrowserRouter>
-          <body className={theme}>
-            <div className="top-bar">
-              <ChangeTheme />
-              <UserBar />
-            </div>
+          <div className={theme}>
             <Header />
             <Nav />
             <Routes>
@@ -38,7 +34,7 @@ function App() {
               ></Route>
               <Route path="*" element={<ErrorPage />} />
             </Routes>
-          </body>
+          </div>
         </BrowserRouter>
       </ThemeContext.Provider>
     </UserContext.Provider>

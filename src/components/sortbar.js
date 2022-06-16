@@ -26,10 +26,10 @@ const SortBar = ({ setSearchParams }) => {
   return (
     <>
       <form className="sort-form" onSubmit={handleSubmit}>
-        <label htmlFor="sort">Sort by:</label>
+        <label htmlFor="choose-sort">Sort by:</label>
         <select
-          name="sort"
-          id="sort"
+          name="choose-sort"
+          id="choose-sort"
           onChange={(event) => {
             setCurrentlySelectedSortBy(event.target.value);
           }}
@@ -41,10 +41,10 @@ const SortBar = ({ setSearchParams }) => {
         <button>Submit</button>
       </form>
       <form className="order-form" onSubmit={handleOrderChange}>
-        <label htmlFor="order">Sort by:</label>
+        <label htmlFor="choose-order">Sort by:</label>
         <select
-          name="order"
-          id="order"
+          name="choose-order"
+          id="choose-order"
           onChange={(event) => {
             setCurrentlySelectedOrderBy(event.target.value);
           }}
