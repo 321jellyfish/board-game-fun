@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme";
 
 const SortBar = ({ setSubmittedOrderBy, setSubmittedSortBy }) => {
+  const { theme } = useContext(ThemeContext);
   const [currentlySelectedSortBy, setCurrentlySelectedSortBy] =
     useState("created_at");
 
@@ -18,7 +21,9 @@ const SortBar = ({ setSubmittedOrderBy, setSubmittedSortBy }) => {
   };
 
   return (
-    <section className="sort-container">
+    <section
+      className={theme === "light" ? "sort-container" : "sort-container-dark"}
+    >
       <form className="sort-form" onSubmit={handleSubmit}>
         <div className="sort-form-label">
           <label htmlFor="choose-sort">Sort by:</label>
