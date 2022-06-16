@@ -52,8 +52,8 @@ const ReviewList = () => {
               created_at,
             }) => {
               return (
-                <section className="review-card">
-                  <ul key={review_id}>
+                <section className="review-card" key={review_id}>
+                  <ul>
                     <li>
                       <h3>{title}</h3>
                     </li>

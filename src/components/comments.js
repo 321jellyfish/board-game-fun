@@ -126,7 +126,7 @@ const Comments = () => {
       {comments ? (
         comments.map(({ body, author, comment_id }) => {
           return (
-            <div className="comment-card">
+            <div className="comment-card" key={comment_id}>
               <p>{body}</p>
               {user.username === author ? (
                 <button
