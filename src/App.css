@@ -1,6 +1,4 @@
-.light {
-  background-color: 	rgb(245,245,245);
-}
+
 
 #theme-button {
   padding: 0.25rem;
@@ -152,18 +150,27 @@ textarea {
   align-items: center;
 }
 
+.light {
+  background-color: 	rgb(245,245,245);
+}
+
 
 .dark {
   background-color: rgb(48,48,48);
+}
+
+body.dark {
   font: rgb(245,245,245);
 }
-.dark h1 a {
-  font:rgb(245,245,245);
+
+.dark .header h1 a {
+  font: rgb(245,245,245);
 }
 
 .dark .review-card {
   background-color: rgb(48,48,48);
   border-color: rgb(245,245,245);
+  font: rgb(245,245,245);
 }
 
 .dark form {

@@ -5,8 +5,8 @@ const ChangeTheme = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const changeTheme = () => {
-    setTheme((currTheme) => {
-      return currTheme === "light" ? "dark" : "light";
+    setTheme((currentTheme) => {
+      return currentTheme === "light" ? "dark" : "light";
     });
   };
 
