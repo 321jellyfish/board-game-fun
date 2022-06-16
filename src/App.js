@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<ReviewList />}></Route>
           <Route path="/:pathcategory" element={<ReviewList />}></Route>
           <Route path="/:pathcategory/:reviewid" element={<Review />}></Route>
-          <Route path="*" element={ErrorPage} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
