@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchReviewById, removeHyphen, changeVotes } from "../utils/api";
 import Comments from "../components/comments";
+import ErrorPage from "./errorpage";
 
 const Review = () => {
   const { pathcategory } = useParams();
@@ -9,15 +10,21 @@ const Review = () => {
 
   const [votes, setVotes] = useState(0);
   const [error, setError] = useState(null);
+  const [reviewError, setReviewError] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
 
   const [review, setReview] = useState({});
 
   useEffect(() => {
-    fetchReviewById(reviewid).then((fetchedReview) => {
-      setReview(fetchedReview);
-      setVotes(review.votes);
-    });
+    fetchReviewById(reviewid)
+      .then((fetchedReview) => {
+        setReview(fetchedReview);
+        setVotes(review.votes);
+        setReviewError(false);
+      })
+      .catch((error) => {
+        setReviewError(true);
+      });
   }, [reviewid, review.votes]);
 
   const handleSubmit = (event) => {
@@ -51,6 +58,9 @@ const Review = () => {
     }
   };
 
+  if (reviewError) {
+    return <ErrorPage />;
+  }
   return (
     <>
       <h2 className="capitalize">

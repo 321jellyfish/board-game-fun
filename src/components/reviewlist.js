@@ -19,7 +19,6 @@ const ReviewList = () => {
     categorySearchParams.category = pathcategory;
     fetchReviews(categorySearchParams)
       .then((fetchedReviews) => {
-        console.log(fetchedReviews);
         setReviews(fetchedReviews);
         setError(false);
       })
