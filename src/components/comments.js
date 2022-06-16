@@ -36,7 +36,7 @@ const Comments = () => {
     if (formInput.body.length >= 5) {
       setFormSubmitted(true);
       setEmptyTextarea("");
-      postComment(user, formInput.body, reviewid)
+      postComment(user.username, formInput.body, reviewid)
         .then(() => {
           setDisableForm(true);
           setFormInput({
@@ -68,6 +68,17 @@ const Comments = () => {
   return (
     <>
       <h3>Comments</h3>
+      <div className="comment-user">
+        <p>
+          <span className="bold">Commenting as: </span>
+          {user.username}
+        </p>
+        <img
+          className="user-img-small"
+          src={user.img_url}
+          alt={user.username}
+        />
+      </div>
       <form onSubmit={handleSubmit}>
         <textarea
           id="comment-body"
@@ -87,6 +98,7 @@ const Comments = () => {
           disabled={disableForm}
           required
         />
+
         {formSubmitted && !succesfullyDelete ? (
           <em>Thank you for your comment</em>
         ) : (
@@ -101,10 +113,7 @@ const Comments = () => {
         )}
         {formSubmitted ? "" : <p>Minimum 5 characters</p>}
         {formSubmitted ? "" : <p>Maximum 100 characters</p>}
-        <p>
-          <span className="bold">Commenting as: </span>
-          {user}
-        </p>
+
         <button disabled={disableForm}>Submit comment</button>
       </form>
       {succesfullyDelete ? (
@@ -119,7 +128,7 @@ const Comments = () => {
           return (
             <div className="comment-card">
               <p>{body}</p>
-              {user === author ? (
+              {user.username === author ? (
                 <button
                   disabled={disableDelete}
                   onClick={(event) => handleDeleteClick(event, comment_id)}
@@ -129,15 +138,12 @@ const Comments = () => {
               ) : (
                 ""
               )}
-              {user === author && deleteError ? (
+              {user.username === author && deleteError ? (
                 <p>Sorry there was a problem, please trying deleting again</p>
               ) : (
                 ""
               )}
-              <p className="commenter">
-                <span className="bold">Commenter: </span>
-                {author}
-              </p>
+              <p className="commenter">{author}</p>
             </div>
           );
         })

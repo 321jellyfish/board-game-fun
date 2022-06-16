@@ -6,7 +6,7 @@ const UserBar = () => {
   return (
     <section className="display-loggedin-user">
       <p>{user.username}</p>
-      <img className="user-img-header" src={user.img_url} alt={user.username} />
+      <img className="user-img-small" src={user.img_url} alt={user.username} />
     </section>
   );
 };

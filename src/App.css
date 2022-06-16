@@ -116,7 +116,7 @@ textarea {
   display: block;
 }
 
-.user-img-header {
+.user-img-small {
   border-radius: 50%;
   max-width: 2rem;
   max-height: 2rem;
@@ -127,6 +127,11 @@ textarea {
   display: flex;
   justify-content: flex-end;
   background-color:rgb(232,232,232, 0.1);
+}
+
+.comment-user {
+  display:flex;
+  justify-content: center;
 }
 
 @media only screen and (min-width: 600px){
