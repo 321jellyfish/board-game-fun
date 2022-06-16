@@ -1,4 +1,4 @@
-import { fetchComments, postComment } from "../utils/api";
+import { fetchComments, postComment, deleteComment } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/user";
@@ -13,7 +13,10 @@ const Comments = () => {
   const [disableForm, setDisableForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [error, setError] = useState(null);
+  const [deleteError, setDeleteError] = useState(null);
   const [emptyTextarea, setEmptyTextarea] = useState("");
+  const [disableDelete, setDisableDelete] = useState(false);
+  const [succesfullyDelete, setSuccessfullyDeleted] = useState(false);
 
   useEffect(() => {
     fetchComments(reviewid).then((fetchedComments) => {
@@ -33,7 +36,7 @@ const Comments = () => {
     if (formInput.body.length >= 5) {
       setFormSubmitted(true);
       setEmptyTextarea("");
-      postComment(user, formInput.body, reviewid)
+      postComment(user.username, formInput.body, reviewid)
         .then(() => {
           setDisableForm(true);
           setFormInput({
@@ -48,9 +51,34 @@ const Comments = () => {
     }
   };
 
+  const handleDeleteClick = (event, comment_id) => {
+    event.preventDefault();
+    setDisableDelete(true);
+    deleteComment(comment_id)
+      .then(() => {
+        setDisableDelete(false);
+        setSuccessfullyDeleted(true);
+      })
+      .catch((error) => {
+        setDisableDelete(false);
+        setDeleteError("Error");
+      });
+  };
+
   return (
     <>
       <h3>Comments</h3>
+      <div className="comment-user">
+        <p>
+          <span className="bold">Commenting as: </span>
+          {user.username}
+        </p>
+        <img
+          className="user-img-small"
+          src={user.img_url}
+          alt={user.username}
+        />
+      </div>
       <form onSubmit={handleSubmit}>
         <textarea
           id="comment-body"
@@ -70,7 +98,12 @@ const Comments = () => {
           disabled={disableForm}
           required
         />
-        {formSubmitted ? <em>Thank you for your comment</em> : ""}
+
+        {formSubmitted && !succesfullyDelete ? (
+          <em>Thank you for your comment</em>
+        ) : (
+          ""
+        )}
         {error ? (
           <p className="bold">
             Sorry there was a problem, please try submitting your comment again
@@ -80,22 +113,37 @@ const Comments = () => {
         )}
         {formSubmitted ? "" : <p>Minimum 5 characters</p>}
         {formSubmitted ? "" : <p>Maximum 100 characters</p>}
-        <p>
-          <span className="bold">Commenting as: </span>
-          {user}
-        </p>
+
         <button disabled={disableForm}>Submit comment</button>
       </form>
-
+      {succesfullyDelete ? (
+        <p>
+          <em>Your comment was deleted</em>
+        </p>
+      ) : (
+        ""
+      )}
       {comments ? (
         comments.map(({ body, author, comment_id }) => {
           return (
             <div className="comment-card">
               <p>{body}</p>
-              <p className="commenter">
-                <span className="bold">Commenter: </span>
-                {author}
-              </p>
+              {user.username === author ? (
+                <button
+                  disabled={disableDelete}
+                  onClick={(event) => handleDeleteClick(event, comment_id)}
+                >
+                  Delete comment
+                </button>
+              ) : (
+                ""
+              )}
+              {user.username === author && deleteError ? (
+                <p>Sorry there was a problem, please trying deleting again</p>
+              ) : (
+                ""
+              )}
+              <p className="commenter">{author}</p>
             </div>
           );
         })

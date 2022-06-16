@@ -4,14 +4,20 @@ import Header from "./components/header";
 import ReviewList from "./components/reviewlist";
 import Nav from "./components/nav";
 import Review from "./components/review";
+import UserBar from "./components/userbar";
 import { UserContext } from "./context/user";
 import { useState } from "react";
 
 function App() {
-  const [user, setUser] = useState("tickle122");
+  const [user, setUser] = useState({
+    username: "jessjelly",
+    img_url:
+      "https://vignette.wikia.nocookie.net/mrmen/images/4/4f/MR_JELLY_4A.jpg/revision/latest?cb=20180104121141",
+  });
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
+        <UserBar />
         <Header />
         <Nav />
         <Routes>

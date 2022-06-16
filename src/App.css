@@ -116,6 +116,26 @@ textarea {
   display: block;
 }
 
+.user-img-small {
+  border-radius: 50%;
+  max-width: 1.5rem;
+  max-height: 1.5rem;
+  margin: 0.5rem;
+}
+
+.display-loggedin-user {
+  display: flex;
+  justify-content: flex-end;
+  background-color:rgb(232,232,232, 0.1);
+  align-items: center;
+}
+
+.comment-user {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media only screen and (min-width: 600px){
   .review-card {
     min-width: 30vw;
