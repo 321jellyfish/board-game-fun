@@ -6,10 +6,13 @@ import Nav from "./components/nav";
 import Review from "./components/review";
 import UserBar from "./components/userbar";
 import ErrorPage from "./components/errorpage";
+import ChangeTheme from "./components/changetheme";
 import { UserContext } from "./context/user";
 import { useState } from "react";
+import { ThemeContext } from "./context/theme";
 
 function App() {
+  const [theme, setTheme] = useState("light");
   const [user, setUser] = useState({
     username: "jessjelly",
     img_url:
@@ -17,17 +20,25 @@ function App() {
   });
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <BrowserRouter>
-        <UserBar />
-        <Header />
-        <Nav />
-        <Routes>
-          <Route path="/" element={<ReviewList />}></Route>
-          <Route path="/:pathcategory" element={<ReviewList />}></Route>
-          <Route path="/:pathcategory/:reviewid" element={<Review />}></Route>
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </BrowserRouter>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <BrowserRouter>
+          <div className={theme}>
+            <UserBar />
+            <ChangeTheme />
+            <Header />
+            <Nav />
+            <Routes>
+              <Route path="/" element={<ReviewList />}></Route>
+              <Route path="/:pathcategory" element={<ReviewList />}></Route>
+              <Route
+                path="/:pathcategory/:reviewid"
+                element={<Review />}
+              ></Route>
+              <Route path="*" element={<ErrorPage />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </ThemeContext.Provider>
     </UserContext.Provider>
   );
 }
