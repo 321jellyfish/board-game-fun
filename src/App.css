@@ -116,6 +116,19 @@ textarea {
   display: block;
 }
 
+.user-img-header {
+  border-radius: 50%;
+  max-width: 2rem;
+  max-height: 2rem;
+  margin: 0.5rem;
+}
+
+.display-loggedin-user {
+  display: flex;
+  justify-content: flex-end;
+  background-color:rgb(232,232,232, 0.1);
+}
+
 @media only screen and (min-width: 600px){
   .review-card {
     min-width: 30vw;
