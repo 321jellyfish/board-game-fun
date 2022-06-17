@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchComments } from "../utils/api";
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
 import { ThemeContext } from "../context/theme";
 
 const CommentList = () => {
@@ -23,7 +22,9 @@ const CommentList = () => {
     comments ? (
       comments.map(({ body, author, comment_id }) => {
         return (
-          <div className="comment-card">
+          <div
+            className={theme === "light" ? "comment-card" : "comment-card-dark"}
+          >
             <p>{body}</p>
             <p className="commenter">
               <span className="bold">Commenter: </span>

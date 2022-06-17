@@ -29,7 +29,7 @@ const Nav = () => {
   };
 
   return (
-    <nav>
+    <nav className={theme === "light" ? "" : "dark-nav"}>
       <form onSubmit={handleSubmit}>
         <label htmlFor="choose-category">Choose category:</label>
         <select

@@ -69,7 +69,9 @@ const Review = () => {
       <h2 className="capitalize">
         <Link to={`/${review.category}`}>{removeHyphen(pathcategory)}</Link>
       </h2>
-      <section className="review-card">
+      <section
+        className={theme === "light" ? "review-card" : "dark-review-card"}
+      >
         <h3>{review.title}</h3>
         <img
           className="individual-image"
@@ -93,7 +95,9 @@ const Review = () => {
         </div>
         {error ? <p>Vote unsuccessful, please try again</p> : ""}
       </section>
-      <section className="review-card">
+      <section
+        className={theme === "light" ? "review-card" : "dark-review-card"}
+      >
         <Comments />
       </section>
     </>
