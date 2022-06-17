@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom";
 import { Link, useSearchParams } from "react-router-dom";
 import SortBar from "./sortbar";
 import ErrorPage from "./errorpage";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme";
 
 const ReviewList = () => {
+  const { theme } = useContext(ThemeContext);
   const { pathcategory } = useParams();
   const [reviews, setReviews] = useState([]);
   const [submittedSortBy, setSubmittedSortBy] = useState("created_at");
@@ -39,7 +42,7 @@ const ReviewList = () => {
   }
   if (!error)
     return (
-      <section>
+      <section className={theme === "light" ? "" : "dark"}>
         <h2>
           {!pathcategory && !error ? "All" : removeHyphen(pathcategory)} Reviews
         </h2>
@@ -61,16 +64,33 @@ const ReviewList = () => {
               created_at,
             }) => {
               return (
-                <section className="review-card" key={review_id}>
+                <section
+                  className={
+                    theme === "light" ? "review-card" : "dark-review-card"
+                  }
+                  key={review_id}
+                >
                   <ul>
                     <li>
                       <h3>{title}</h3>
                     </li>
-                    <div className="review-card-body">
+                    <div
+                      className={
+                        theme === "light"
+                          ? "review-card-body"
+                          : "dark-review-card-body"
+                      }
+                    >
                       <li>
                         <img src={review_img_url} alt={title} />
                       </li>
-                      <div className="review-card-text">
+                      <div
+                        className={
+                          theme === "light"
+                            ? "review-card-text"
+                            : "dark-review-card-text"
+                        }
+                      >
                         <li>
                           <span className="bold">Owner: </span>
                           {owner}

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchCategories, removeHyphen } from "../utils/api";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme";
 
 const Nav = () => {
+  const { theme } = useContext(ThemeContext);
   const [categories, setCategories] = useState([]);
   const [chosenCategory, setChosenCategory] = useState("");
   const [currentlySelectedCategory, setCurrentlySelectedCategory] =
@@ -26,7 +29,7 @@ const Nav = () => {
   };
 
   return (
-    <nav>
+    <nav className={theme === "light" ? "" : "dark-nav"}>
       <form onSubmit={handleSubmit}>
         <label htmlFor="choose-category">Choose category:</label>
         <select

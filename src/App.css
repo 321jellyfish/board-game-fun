@@ -68,9 +68,35 @@ header p {
   text-align: left;
 }
 
+.dark-review-card-text{
+  text-align: left;
+}
+
 .review-card-body {
   display: flex;
   gap: 2rem;
+}
+
+.dark-review-card-body {
+  display: flex;
+  gap: 2rem;
+}
+
+.dark-review-card {
+  background-color:		rgb(72,72,72);
+  margin: 1rem;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  padding-bottom: 1.6rem;
+  max-width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0.25rem solid white;
+  color: white;
+}
+
+.dark-review-card a{
+  color: white;
 }
 
 .bold {
@@ -93,6 +119,14 @@ header p {
   padding: 0.5rem;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
+}
+
+.comment-card-dark {
+  padding: 0.5rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  background-color:rgb(136,136,136);
+  color: white;
 }
 
 .commenter {
@@ -159,37 +193,32 @@ textarea {
   align-items: center;
 }
 
+.dark-display-loggedin-user{
+  display: flex;
+  justify-content: flex-end;
+  background-color:rgb(72,72,72);
+  align-items: center;
+}
+
+.dark-nav {
+  background-color:rgb(72,72,72);
+  color: white;
+}
+.dark {
+  background-color:rgb(72,72,72, 0.8);
+  color: white;
+}
+
 .comment-user {
   display:flex;
   justify-content: center;
   align-items: center;
 }
 
-
-
- /* .dark {
-  background-color: rgb(48,48,48); 
-  font:pink;
-} */
-
-
-/* .dark header h1 a {
-  font: rgb(245,245,245);
+.sort-container-dark {
+  background-color:rgb(72,72,72);
+  color: white;
 }
-
-.dark .review-card {
-  background-color: rgb(48,48,48);
-  border-color: rgb(245,245,245);
-  font: rgb(245,245,245);
-}
-
-.dark form {
-  background-color: rgb(48,48,48);
-}
-
-.dark header h1 a {
-  font: rgb(245,245,245);
-}  */
 
 .top-bar {
   display: flex;
@@ -199,8 +228,29 @@ textarea {
   margin-bottom: 0.5rem;
 }
 
+.top-bar-dark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: 	rgb(72,72,72);
+  margin-bottom: 0.5rem;
+}
+
+.dark-header {
+  background-color: 	rgb(72,72,72);
+  color: white;
+}
+
+.dark-h1 {
+  color: white;
+}
+
 @media only screen and (min-width: 600px){
   .review-card {
+    min-width: 30vw;
+    max-width: 40vw;
+  }
+  .dark-review-card {
     min-width: 30vw;
     max-width: 40vw;
   }
@@ -215,6 +265,10 @@ textarea {
   }
   .user-img-small {
     margin-right: 27vw;
+  }
+  .comment-user {
+    margin-left: 75%;
+  
   }
 }
 
