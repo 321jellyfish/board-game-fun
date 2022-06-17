@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme";
 
 const ErrorPage = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       <p>

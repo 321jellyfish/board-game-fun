@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom";
 import { Link, useSearchParams } from "react-router-dom";
 import SortBar from "./sortbar";
 import ErrorPage from "./errorpage";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme";
 
 const ReviewList = () => {
+  const { theme } = useContext(ThemeContext);
   const { pathcategory } = useParams();
   const [reviews, setReviews] = useState([]);
   const [submittedSortBy, setSubmittedSortBy] = useState("created_at");

@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import { fetchReviewById, removeHyphen, changeVotes } from "../utils/api";
 import Comments from "../components/comments";
 import ErrorPage from "./errorpage";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme";
 
 const Review = () => {
+  const { theme } = useContext(ThemeContext);
   const { pathcategory } = useParams();
   const { reviewid } = useParams();
 

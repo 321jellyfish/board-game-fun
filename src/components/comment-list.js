@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchComments } from "../utils/api";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../context/theme";
 
 const CommentList = () => {
+  const { theme } = useContext(ThemeContext);
   const [comments, setComments] = useState([]);
   const { reviewid } = useParams();
 

@@ -159,6 +159,13 @@ textarea {
   align-items: center;
 }
 
+.dark-display-loggedin-user{
+  display: flex;
+  justify-content: flex-end;
+  background-color:rgb(72,72,72);
+  align-items: center;
+}
+
 .comment-user {
   display:flex;
   justify-content: center;
@@ -166,37 +173,29 @@ textarea {
 }
 
 
-
- /* .dark {
-  background-color: rgb(48,48,48); 
-  font:pink;
-} */
-
-
-/* .dark header h1 a {
-  font: rgb(245,245,245);
-}
-
-.dark .review-card {
-  background-color: rgb(48,48,48);
-  border-color: rgb(245,245,245);
-  font: rgb(245,245,245);
-}
-
-.dark form {
-  background-color: rgb(48,48,48);
-}
-
-.dark header h1 a {
-  font: rgb(245,245,245);
-}  */
-
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: rgb(245,245,245);
   margin-bottom: 0.5rem;
+}
+
+.top-bar-dark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: 	rgb(72,72,72);
+  margin-bottom: 0.5rem;
+}
+
+.dark-header {
+  background-color: 	rgb(72,72,72);
+  color: white;
+}
+
+.dark-h1 {
+  color: white;
 }
 
 @media only screen and (min-width: 600px){

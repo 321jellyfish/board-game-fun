@@ -2,8 +2,10 @@ import { fetchComments, postComment, deleteComment } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/user";
+import { ThemeContext } from "../context/theme";
 
 const Comments = () => {
+  const { theme } = useContext(ThemeContext);
   const { reviewid } = useParams();
   const [comments, setComments] = useState([]);
   const { user } = useContext(UserContext);
